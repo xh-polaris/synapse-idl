@@ -1,7 +1,7 @@
 namespace go base
 
 struct App {
-    1: string Name = "",
+    1: string name = "",
 }
 
 struct Response {
