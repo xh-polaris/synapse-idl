@@ -46,7 +46,6 @@ jobs:
       - name: Update
         run: |
           rm -rf hzcli
-          export IDL_DIR=./idl
           sh hzcli-build.sh
 
       # 提交生成后的代码到main分支
