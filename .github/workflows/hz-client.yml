@@ -38,7 +38,7 @@ jobs:
           go-version: "1.24"
 
       # 安装代码生成工具
-      - name: Install Protobuf Compiler
+      - name: Install hz
         run: |
           go install github.com/zeromicro/go-zero/tools/goctl@latest
           go install github.com/cloudwego/hertz/cmd/hz@latest
@@ -47,9 +47,8 @@ jobs:
       # 指定生成代码的目录, 然后生成代码
       - name: Update
         run: |
-          rm -rf kitex_gen
+          rm -rf hzcli
           export IDL_DIR=./idl
-          chmod 755 /home/runner/go/bin/protoc
           sh build.sh
 
       # 提交生成后的代码到main分支
