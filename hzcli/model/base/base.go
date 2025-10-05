@@ -7,7 +7,7 @@ import (
 )
 
 type App struct {
-	Name string `thrift:"Name,1" form:"Name" json:"Name" query:"Name"`
+	Name string `thrift:"name,1" form:"name" json:"name" query:"name"`
 }
 
 func NewApp() *App {
