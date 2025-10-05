@@ -40,16 +40,14 @@ jobs:
       # 安装代码生成工具
       - name: Install hz
         run: |
-          go install github.com/zeromicro/go-zero/tools/goctl@latest
           go install github.com/cloudwego/hertz/cmd/hz@latest
-          goctl env check --install --verbose --force
 
       # 指定生成代码的目录, 然后生成代码
       - name: Update
         run: |
           rm -rf hzcli
           export IDL_DIR=./idl
-          sh build.sh
+          sh hzcli-build.sh
 
       # 提交生成后的代码到main分支
       - name: Commit And Push
