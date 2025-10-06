@@ -36,5 +36,16 @@ struct BasicUserLoginReq {
 struct BasicUserLoginResp {
     1:   base.Response resp,
     2:   string token,
+    3:   bool   new,
     255: BasicUser basicUser,
+}
+
+// 修改密码
+struct BasicUserResetPasswordReq {
+    1: string newPassword
+    255: base.App        app,
+}
+
+struct BasicUserResetPasswordResp {
+    1:   base.Response resp,
 }
