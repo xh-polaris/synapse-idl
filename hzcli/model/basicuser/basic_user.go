@@ -197,6 +197,7 @@ func (p *BasicUserLoginReq) String() string {
 type BasicUserLoginResp struct {
 	Resp      *base.Response `thrift:"resp,1" form:"resp" json:"resp" query:"resp"`
 	Token     string         `thrift:"token,2" form:"token" json:"token" query:"token"`
+	New       bool           `thrift:"new,3" form:"new" json:"new" query:"new"`
 	BasicUser *BasicUser     `thrift:"basicUser,255" form:"basicUser" json:"basicUser" query:"basicUser"`
 }
 
@@ -218,6 +219,10 @@ func (p *BasicUserLoginResp) GetResp() (v *base.Response) {
 
 func (p *BasicUserLoginResp) GetToken() (v string) {
 	return p.Token
+}
+
+func (p *BasicUserLoginResp) GetNew() (v bool) {
+	return p.New
 }
 
 var BasicUserLoginResp_BasicUser_DEFAULT *BasicUser
@@ -242,4 +247,72 @@ func (p *BasicUserLoginResp) String() string {
 		return "<nil>"
 	}
 	return fmt.Sprintf("BasicUserLoginResp(%+v)", *p)
+}
+
+// 修改密码
+type BasicUserResetPasswordReq struct {
+	NewPassword string    `thrift:"newPassword,1" form:"newPassword" json:"newPassword" query:"newPassword"`
+	App         *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
+}
+
+func NewBasicUserResetPasswordReq() *BasicUserResetPasswordReq {
+	return &BasicUserResetPasswordReq{}
+}
+
+func (p *BasicUserResetPasswordReq) InitDefault() {
+}
+
+func (p *BasicUserResetPasswordReq) GetNewPassword() (v string) {
+	return p.NewPassword
+}
+
+var BasicUserResetPasswordReq_App_DEFAULT *base.App
+
+func (p *BasicUserResetPasswordReq) GetApp() (v *base.App) {
+	if !p.IsSetApp() {
+		return BasicUserResetPasswordReq_App_DEFAULT
+	}
+	return p.App
+}
+
+func (p *BasicUserResetPasswordReq) IsSetApp() bool {
+	return p.App != nil
+}
+
+func (p *BasicUserResetPasswordReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("BasicUserResetPasswordReq(%+v)", *p)
+}
+
+type BasicUserResetPasswordResp struct {
+	Resp *base.Response `thrift:"resp,1" form:"resp" json:"resp" query:"resp"`
+}
+
+func NewBasicUserResetPasswordResp() *BasicUserResetPasswordResp {
+	return &BasicUserResetPasswordResp{}
+}
+
+func (p *BasicUserResetPasswordResp) InitDefault() {
+}
+
+var BasicUserResetPasswordResp_Resp_DEFAULT *base.Response
+
+func (p *BasicUserResetPasswordResp) GetResp() (v *base.Response) {
+	if !p.IsSetResp() {
+		return BasicUserResetPasswordResp_Resp_DEFAULT
+	}
+	return p.Resp
+}
+
+func (p *BasicUserResetPasswordResp) IsSetResp() bool {
+	return p.Resp != nil
+}
+
+func (p *BasicUserResetPasswordResp) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("BasicUserResetPasswordResp(%+v)", *p)
 }

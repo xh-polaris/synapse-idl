@@ -11,4 +11,6 @@ type BasicUserService interface {
 	BasicUserRegister(ctx context.Context, req *BasicUserRegisterReq) (r *BasicUserRegisterResp, err error)
 
 	BasicUserLogin(ctx context.Context, req *BasicUserLoginReq) (r *BasicUserLoginResp, err error)
+
+	BasicUserResetPassword(ctx context.Context, req *BasicUserResetPasswordReq) (r *BasicUserResetPasswordResp, err error)
 }
