@@ -14,3 +14,7 @@ type SystemService interface {
 type BasicUserService interface {
 	basicuser.BasicUserService
 }
+
+type ThirdPartyService interface {
+	basicuser.ThirdPartyService
+}
