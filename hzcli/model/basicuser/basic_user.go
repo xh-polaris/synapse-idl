@@ -38,10 +38,12 @@ type BasicUserRegisterReq struct {
 	AuthType string `thrift:"authType,1" form:"authType" json:"authType" query:"authType"`
 	// 认证id
 	AuthId string `thrift:"authId,2" form:"authId" json:"authId" query:"authId"`
+	// 扩展认证id
+	ExtraAuthId *string `thrift:"extraAuthId,3,optional" form:"extraAuthId" json:"extraAuthId,omitempty" query:"extraAuthId"`
 	// 认证凭证
-	Verify string `thrift:"verify,3" form:"verify" json:"verify" query:"verify"`
+	Verify string `thrift:"verify,4" form:"verify" json:"verify" query:"verify"`
 	// 是否初始化密码
-	Password *string   `thrift:"password,4,optional" form:"password" json:"password,omitempty" query:"password"`
+	Password *string   `thrift:"password,5,optional" form:"password" json:"password,omitempty" query:"password"`
 	App      *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
 }
 
@@ -58,6 +60,15 @@ func (p *BasicUserRegisterReq) GetAuthType() (v string) {
 
 func (p *BasicUserRegisterReq) GetAuthId() (v string) {
 	return p.AuthId
+}
+
+var BasicUserRegisterReq_ExtraAuthId_DEFAULT string
+
+func (p *BasicUserRegisterReq) GetExtraAuthId() (v string) {
+	if !p.IsSetExtraAuthId() {
+		return BasicUserRegisterReq_ExtraAuthId_DEFAULT
+	}
+	return *p.ExtraAuthId
 }
 
 func (p *BasicUserRegisterReq) GetVerify() (v string) {
@@ -80,6 +91,10 @@ func (p *BasicUserRegisterReq) GetApp() (v *base.App) {
 		return BasicUserRegisterReq_App_DEFAULT
 	}
 	return p.App
+}
+
+func (p *BasicUserRegisterReq) IsSetExtraAuthId() bool {
+	return p.ExtraAuthId != nil
 }
 
 func (p *BasicUserRegisterReq) IsSetPassword() bool {
@@ -149,10 +164,12 @@ func (p *BasicUserRegisterResp) String() string {
 
 // 基础用户登录
 type BasicUserLoginReq struct {
-	AuthType string    `thrift:"authType,1" form:"authType" json:"authType" query:"authType"`
-	AuthId   string    `thrift:"authId,2" form:"authId" json:"authId" query:"authId"`
-	Verify   string    `thrift:"verify,3" form:"verify" json:"verify" query:"verify"`
-	App      *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
+	AuthType string `thrift:"authType,1" form:"authType" json:"authType" query:"authType"`
+	AuthId   string `thrift:"authId,2" form:"authId" json:"authId" query:"authId"`
+	// 扩展认证id
+	ExtraAuthId *string   `thrift:"extraAuthId,3,optional" form:"extraAuthId" json:"extraAuthId,omitempty" query:"extraAuthId"`
+	Verify      string    `thrift:"verify,4" form:"verify" json:"verify" query:"verify"`
+	App         *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
 }
 
 func NewBasicUserLoginReq() *BasicUserLoginReq {
@@ -170,6 +187,15 @@ func (p *BasicUserLoginReq) GetAuthId() (v string) {
 	return p.AuthId
 }
 
+var BasicUserLoginReq_ExtraAuthId_DEFAULT string
+
+func (p *BasicUserLoginReq) GetExtraAuthId() (v string) {
+	if !p.IsSetExtraAuthId() {
+		return BasicUserLoginReq_ExtraAuthId_DEFAULT
+	}
+	return *p.ExtraAuthId
+}
+
 func (p *BasicUserLoginReq) GetVerify() (v string) {
 	return p.Verify
 }
@@ -181,6 +207,10 @@ func (p *BasicUserLoginReq) GetApp() (v *base.App) {
 		return BasicUserLoginReq_App_DEFAULT
 	}
 	return p.App
+}
+
+func (p *BasicUserLoginReq) IsSetExtraAuthId() bool {
+	return p.ExtraAuthId != nil
 }
 
 func (p *BasicUserLoginReq) IsSetApp() bool {
