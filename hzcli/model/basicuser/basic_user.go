@@ -283,7 +283,7 @@ func (p *BasicUserLoginResp) String() string {
 type BasicUserResetPasswordReq struct {
 	NewPassword string `thrift:"newPassword,1" form:"newPassword" json:"newPassword" query:"newPassword"`
 	// 重置码
-	ResetCode string    `thrift:"resetCode,2" form:"resetCode" json:"resetCode" query:"resetCode"`
+	ResetCode *string   `thrift:"resetCode,2,optional" form:"resetCode" json:"resetCode,omitempty" query:"resetCode"`
 	App       *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
 }
 
@@ -298,8 +298,13 @@ func (p *BasicUserResetPasswordReq) GetNewPassword() (v string) {
 	return p.NewPassword
 }
 
+var BasicUserResetPasswordReq_ResetCode_DEFAULT string
+
 func (p *BasicUserResetPasswordReq) GetResetCode() (v string) {
-	return p.ResetCode
+	if !p.IsSetResetCode() {
+		return BasicUserResetPasswordReq_ResetCode_DEFAULT
+	}
+	return *p.ResetCode
 }
 
 var BasicUserResetPasswordReq_App_DEFAULT *base.App
@@ -309,6 +314,10 @@ func (p *BasicUserResetPasswordReq) GetApp() (v *base.App) {
 		return BasicUserResetPasswordReq_App_DEFAULT
 	}
 	return p.App
+}
+
+func (p *BasicUserResetPasswordReq) IsSetResetCode() bool {
+	return p.ResetCode != nil
 }
 
 func (p *BasicUserResetPasswordReq) IsSetApp() bool {
