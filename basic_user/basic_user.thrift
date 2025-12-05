@@ -45,7 +45,7 @@ struct BasicUserLoginResp {
 // 修改密码
 struct BasicUserResetPasswordReq {
     1: string newPassword,
-    2: string resetCode, // 重置码
+    2: optional string resetCode, // 重置码
     255: base.App        app,
 }
 
