@@ -46,6 +46,7 @@ struct BasicUserLoginResp {
 struct BasicUserResetPasswordReq {
     1: string newPassword,
     2: optional string resetKey, // 重置码
+    3: optional string basicUserId,
     255: base.App        app,
 }
 
