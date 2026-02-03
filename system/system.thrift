@@ -28,3 +28,25 @@ struct CheckVerifyCodeResp{
     1: base.Response resp
     2: bool verify
 }
+
+// 签发ticket
+struct SignTicketReq {
+    255: base.App app
+}
+
+struct SignTicketResp {
+    1: base.Response resp
+    2: string ticket      // 签发的token
+}
+
+// 换取token
+struct ExchangeTicketReq {
+    1: string ticket      // 签发的token
+    2: string ticketKey   // app对应的兑换密钥
+    255: base.App app
+}
+
+struct ExchangeTicketResp {
+    1: base.Response resp
+    2: string token      // 签发的token
+}
