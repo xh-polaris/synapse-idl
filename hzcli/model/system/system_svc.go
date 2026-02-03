@@ -11,4 +11,8 @@ type SystemService interface {
 	SendVerifyCode(ctx context.Context, req *SendVerifyCodeReq) (r *SendVerifyCodeResp, err error)
 
 	CheckVerifyCode(ctx context.Context, req *CheckVerifyCodeReq) (r *CheckVerifyCodeResp, err error)
+	// 签发ticket
+	SignTicket(ctx context.Context, req *SignTicketReq) (r *SignTicketResp, err error)
+	// 兑换ticket
+	ExchangeTicket(ctx context.Context, req *ExchangeTicketReq) (r *ExchangeTicketResp, err error)
 }

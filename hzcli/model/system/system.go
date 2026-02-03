@@ -181,3 +181,153 @@ func (p *CheckVerifyCodeResp) String() string {
 	}
 	return fmt.Sprintf("CheckVerifyCodeResp(%+v)", *p)
 }
+
+// 签发ticket
+type SignTicketReq struct {
+	App *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
+}
+
+func NewSignTicketReq() *SignTicketReq {
+	return &SignTicketReq{}
+}
+
+func (p *SignTicketReq) InitDefault() {
+}
+
+var SignTicketReq_App_DEFAULT *base.App
+
+func (p *SignTicketReq) GetApp() (v *base.App) {
+	if !p.IsSetApp() {
+		return SignTicketReq_App_DEFAULT
+	}
+	return p.App
+}
+
+func (p *SignTicketReq) IsSetApp() bool {
+	return p.App != nil
+}
+
+func (p *SignTicketReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("SignTicketReq(%+v)", *p)
+}
+
+type SignTicketResp struct {
+	Resp *base.Response `thrift:"resp,1" form:"resp" json:"resp" query:"resp"`
+	// 签发的token
+	Ticket string `thrift:"ticket,2" form:"ticket" json:"ticket" query:"ticket"`
+}
+
+func NewSignTicketResp() *SignTicketResp {
+	return &SignTicketResp{}
+}
+
+func (p *SignTicketResp) InitDefault() {
+}
+
+var SignTicketResp_Resp_DEFAULT *base.Response
+
+func (p *SignTicketResp) GetResp() (v *base.Response) {
+	if !p.IsSetResp() {
+		return SignTicketResp_Resp_DEFAULT
+	}
+	return p.Resp
+}
+
+func (p *SignTicketResp) GetTicket() (v string) {
+	return p.Ticket
+}
+
+func (p *SignTicketResp) IsSetResp() bool {
+	return p.Resp != nil
+}
+
+func (p *SignTicketResp) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("SignTicketResp(%+v)", *p)
+}
+
+// 换取token
+type ExchangeTicketReq struct {
+	// 签发的token
+	Ticket string `thrift:"ticket,1" form:"ticket" json:"ticket" query:"ticket"`
+	// app对应的兑换密钥
+	TicketKey string    `thrift:"ticketKey,2" form:"ticketKey" json:"ticketKey" query:"ticketKey"`
+	App       *base.App `thrift:"app,255" form:"app" json:"app" query:"app"`
+}
+
+func NewExchangeTicketReq() *ExchangeTicketReq {
+	return &ExchangeTicketReq{}
+}
+
+func (p *ExchangeTicketReq) InitDefault() {
+}
+
+func (p *ExchangeTicketReq) GetTicket() (v string) {
+	return p.Ticket
+}
+
+func (p *ExchangeTicketReq) GetTicketKey() (v string) {
+	return p.TicketKey
+}
+
+var ExchangeTicketReq_App_DEFAULT *base.App
+
+func (p *ExchangeTicketReq) GetApp() (v *base.App) {
+	if !p.IsSetApp() {
+		return ExchangeTicketReq_App_DEFAULT
+	}
+	return p.App
+}
+
+func (p *ExchangeTicketReq) IsSetApp() bool {
+	return p.App != nil
+}
+
+func (p *ExchangeTicketReq) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("ExchangeTicketReq(%+v)", *p)
+}
+
+type ExchangeTicketResp struct {
+	Resp *base.Response `thrift:"resp,1" form:"resp" json:"resp" query:"resp"`
+	// 签发的token
+	Token string `thrift:"token,2" form:"token" json:"token" query:"token"`
+}
+
+func NewExchangeTicketResp() *ExchangeTicketResp {
+	return &ExchangeTicketResp{}
+}
+
+func (p *ExchangeTicketResp) InitDefault() {
+}
+
+var ExchangeTicketResp_Resp_DEFAULT *base.Response
+
+func (p *ExchangeTicketResp) GetResp() (v *base.Response) {
+	if !p.IsSetResp() {
+		return ExchangeTicketResp_Resp_DEFAULT
+	}
+	return p.Resp
+}
+
+func (p *ExchangeTicketResp) GetToken() (v string) {
+	return p.Token
+}
+
+func (p *ExchangeTicketResp) IsSetResp() bool {
+	return p.Resp != nil
+}
+
+func (p *ExchangeTicketResp) String() string {
+	if p == nil {
+		return "<nil>"
+	}
+	return fmt.Sprintf("ExchangeTicketResp(%+v)", *p)
+}
